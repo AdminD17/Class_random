@@ -11,13 +11,13 @@ public class JTextFieldHint extends JTextField implements FocusListener {
 	/**
 	 * @author David Giordana
 	 */
-	
+
 	/**
 	 * *INFORMACION
 	 * La clase genera un campo de texto con dindicador.
 	 * Esta implementacion extiende de JTextField e incorpora
 	 * los metodos y atributos necesarios para el funcionamiento.
-	 * 
+	 *
 	 * *ADVERTENCIA:
 	 * *para obtener y setear el contenido del campo no se deben
 	 * utilizar los metodos convencionales, sino los provistos por la
@@ -84,6 +84,7 @@ public class JTextFieldHint extends JTextField implements FocusListener {
 		this.Font_Gained = Font_Gained;
 		this.Color_Lost = Color_Lost;
 		this.Color_Gained = Color_Gained;
+		this.hint = "";
 	}
 
 	/**
@@ -147,7 +148,7 @@ public class JTextFieldHint extends JTextField implements FocusListener {
 	}
 
 	/**
-	 * limpia el contenido del campo de texto 
+	 * limpia el contenido del campo de texto
 	 * mostrando el indicador
 	 */
 	public void clearField(){
