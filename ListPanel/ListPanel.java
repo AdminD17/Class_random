@@ -83,7 +83,7 @@ public class ListPanel extends JPanel {
 	 * listener de la clase
 	 */
 	private ListPanelListener listener;
-	
+
 	/**
 	 * listener por defecto
 	 */
@@ -140,7 +140,7 @@ public class ListPanel extends JPanel {
 		gbc.gridheight = 1;
 		gbc.weightx = 1.0;
 		gbc.weighty = 1.0;
-		gbc.fill= GridBagConstraints.BOTH; 
+		gbc.fill= GridBagConstraints.BOTH;
 		this.add(list , gbc);
 		gbc.gridx = 0;
 		gbc.gridy = 1;
@@ -148,7 +148,7 @@ public class ListPanel extends JPanel {
 		gbc.gridheight = 1;
 		gbc.weightx = 1.0;
 		gbc.weighty = 0.0;
-		gbc.fill= GridBagConstraints.HORIZONTAL; 
+		gbc.fill= GridBagConstraints.HORIZONTAL;
 		this.add(editItem , gbc);
 		gbc.gridx = 1;
 		gbc.gridy = 1;
@@ -156,7 +156,7 @@ public class ListPanel extends JPanel {
 		gbc.gridheight = 1;
 		gbc.weightx = 0.0;
 		gbc.weighty = 0.0;
-		gbc.fill= GridBagConstraints.HORIZONTAL; 
+		gbc.fill= GridBagConstraints.HORIZONTAL;
 		this.add(removeItem , gbc);
 		gbc.gridx = 2;
 		gbc.gridy = 1;
@@ -164,7 +164,7 @@ public class ListPanel extends JPanel {
 		gbc.gridheight = 1;
 		gbc.weightx = 0.0;
 		gbc.weighty = 0.0;
-		gbc.fill= GridBagConstraints.HORIZONTAL; 
+		gbc.fill= GridBagConstraints.HORIZONTAL;
 		this.add(addItem , gbc);
 		gbc.gridx = 0;
 		gbc.gridy = 2;
@@ -172,15 +172,15 @@ public class ListPanel extends JPanel {
 		gbc.gridheight = 1;
 		gbc.weightx = 1.0;
 		gbc.weighty = 0.0;
-		gbc.fill= GridBagConstraints.HORIZONTAL; 
+		gbc.fill= GridBagConstraints.HORIZONTAL;
 		this.add(textField , gbc);
 		gbc.gridx = 2;
 		gbc.gridy = 2;
 		gbc.gridwidth = 1;
 		gbc.gridheight = 1;
-		gbc.weightx = 1.0;
+		gbc.weightx = 0.0;
 		gbc.weighty = 0.0;
-		gbc.fill= GridBagConstraints.HORIZONTAL; 
+		gbc.fill= GridBagConstraints.HORIZONTAL;
 		this.add(acept , gbc);
 	}
 
@@ -243,7 +243,7 @@ public class ListPanel extends JPanel {
 						index ,
 						str);
 				//si se esta creando un item
-				if(isCreating){				
+				if(isCreating){
 					list.add(str);
 					isCreating = false;
 					//activa el listener
@@ -255,7 +255,7 @@ public class ListPanel extends JPanel {
 				else if(isEditing && index >= 0){
 					list.setElementAt(str, index);
 					isEditing = false;
-					//activa el listener 
+					//activa el listener
 					listener.editItemEvent(event);
 					textField.clearField();
 					setInEnabled(false);
@@ -276,8 +276,8 @@ public class ListPanel extends JPanel {
 			public void valueChanged(ListSelectionEvent e) {
 				if(!isCreating && !isEditing){
 					ListPanelEvent event = new ListPanelEvent(
-							this , 
-							list.getSelectedIndex() , 
+							this ,
+							list.getSelectedIndex() ,
 							list.getSelectedValue());
 					listener.selectElementEvent(event);
 				}
@@ -354,6 +354,35 @@ public class ListPanel extends JPanel {
 	 */
 	public void removeListPanelListener(){
 		listener = defListener;
+	}
+
+	/**
+	 * obtiene la lista con scroll del panel
+	 * @return lista con scroll
+	 */
+	public ScrollableList getScrollableList(){
+		return list;
+	}
+
+	/**
+	 * obtiene el contenido de la entrada en caso de ser posible
+	 * @return contenido de campo de entrada, "" si no esta en modo edicion
+	 */
+	public String getIn(){
+		if(isEditing){
+			return textField.getContent();
+		}
+		return null;
+	}
+
+	/**
+	 * setea el contenido de la entrada de datos en caso de ser posible
+	 * @param str texto a setear
+	 */
+	public void setIn(String str){
+		if(isEditing){
+			textField.setContent(str);
+		}
 	}
 
 
