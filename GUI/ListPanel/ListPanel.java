@@ -1,4 +1,4 @@
-package ListPanel;
+package ExtraClass.GUI.ListPanel;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -9,6 +9,9 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+import ExtraClass.GUI.JTextFieldHint;
+import ExtraClass.GUI.ScrollableList;
 
 
 public class ListPanel extends JPanel {

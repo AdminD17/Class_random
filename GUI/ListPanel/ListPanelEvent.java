@@ -1,4 +1,4 @@
-package ListPanel;
+package ExtraClass.GUI.ListPanel;
 
 import java.util.EventObject;
 

@@ -1,4 +1,4 @@
-package ListPanel;
+package ExtraClass.GUI;
 
 
 import java.awt.Color;
