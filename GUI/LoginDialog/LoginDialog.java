@@ -1,6 +1,7 @@
 package ExtraClass.GUI.LoginDialog;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -14,6 +15,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
@@ -113,6 +115,11 @@ public class LoginDialog extends JDialog{
 	 * etiqueta de contraseña
 	 */
 	private JLabel passLab;
+	
+	/**
+	 * separador 1 de la interfaz
+	 */
+	private JSeparator sep1;
 
 	/**
 	 * campo de usuario
@@ -175,6 +182,7 @@ public class LoginDialog extends JDialog{
 		super(owner);
 		setTitleLabel(title);
 		setDescriptionText(description);
+		setSeparators();
 		setUserField(logLab);
 		setPassField(passLab);
 		JPanel but = setButtons(cancel , register , login , mode);
@@ -200,6 +208,14 @@ public class LoginDialog extends JDialog{
 		this.getContentPane().add(this.description , gbc);
 		gbc.gridx = 0;
 		gbc.gridy = 2;
+		gbc.gridwidth = 2;
+		gbc.gridheight = 1;
+		gbc.weightx = 1.0;
+		gbc.weighty = 0.0;
+		gbc.fill= GridBagConstraints.HORIZONTAL;
+		this.getContentPane().add(sep1 , gbc);
+		gbc.gridx = 0;
+		gbc.gridy = 3;
 		gbc.gridwidth = 1;
 		gbc.gridheight = 1;
 		gbc.weightx = 0.0;
@@ -207,7 +223,7 @@ public class LoginDialog extends JDialog{
 		gbc.fill= GridBagConstraints.NONE;
 		this.getContentPane().add(this.userLab , gbc);
 		gbc.gridx = 1;
-		gbc.gridy = 2;
+		gbc.gridy = 3;
 		gbc.gridwidth = 1;
 		gbc.gridheight = 1;
 		gbc.weightx = 1.0;
@@ -215,7 +231,7 @@ public class LoginDialog extends JDialog{
 		gbc.fill= GridBagConstraints.HORIZONTAL;
 		this.getContentPane().add(this.userField , gbc);
 		gbc.gridx = 0;
-		gbc.gridy = 3;
+		gbc.gridy = 4;
 		gbc.gridwidth = 1;
 		gbc.gridheight = 1;
 		gbc.weightx = 0.0;
@@ -223,7 +239,7 @@ public class LoginDialog extends JDialog{
 		gbc.fill= GridBagConstraints.NONE;
 		this.getContentPane().add(this.passLab , gbc);
 		gbc.gridx = 1;
-		gbc.gridy = 3;
+		gbc.gridy = 4;
 		gbc.gridwidth = 1;
 		gbc.gridheight = 1;
 		gbc.weightx = 1.0;
@@ -231,7 +247,7 @@ public class LoginDialog extends JDialog{
 		gbc.fill= GridBagConstraints.BOTH;
 		this.getContentPane().add(this.passField , gbc);
 		gbc.gridx = 0;
-		gbc.gridy = 4;
+		gbc.gridy = 5;
 		gbc.gridwidth = 2;
 		gbc.gridheight = 1;
 		gbc.weightx = 1.0;
@@ -334,6 +350,14 @@ public class LoginDialog extends JDialog{
 	/**
 	 * ---- CONSTRUCT FUNCTIONS
 	 */
+	
+	/**
+	 * setea los separadores
+	 */
+	private void setSeparators(){
+		sep1 = new JSeparator();
+		sep1.setPreferredSize(new Dimension(5,1));
+	}
 
 	/**
 	 * setea la botonera de la ventana
@@ -360,6 +384,7 @@ public class LoginDialog extends JDialog{
 		if(mode == LOGIN_MODE){
 			ret.add(setLoginButton(login));
 		}
+		ret.setBorder(new EmptyBorder(0, 0, 5, 0));
 		return ret;
 	}
 
@@ -412,7 +437,9 @@ public class LoginDialog extends JDialog{
 	 */
 	private void setTitleLabel(String str){
 		title = new JLabel(str);
+		title.setFont(new Font("Lucida Grande", Font.BOLD, 18));
 		title.setFocusable(false);
+		title.setBorder(new EmptyBorder(10, 10, 10, 10));
 		this.setTitle(str);	
 	}
 
@@ -422,11 +449,15 @@ public class LoginDialog extends JDialog{
 	 */
 	private void setDescriptionText(String str){
 		description = new JTextArea();
+		description.setBackground(null);
+		description.setFont(JTextFieldHint.FONT_GAINED_DEFAULT);
 		description.setText(str);
 		description.setEditable(false);
 		description.setFocusable(false);
 		description.setLineWrap(true);
 		description.setWrapStyleWord(true);
+		description.setBorder(new EmptyBorder(3, 10, 3, 10));
+		description.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
 	}
 
 	/**
@@ -436,6 +467,7 @@ public class LoginDialog extends JDialog{
 	private void setUserField(String str){
 		userLab = new JLabel(str);
 		userLab.setBorder(new EmptyBorder(0, 10, 0, 1));
+		userLab.setFont(JTextFieldHint.FONT_GAINED_DEFAULT);
 		userField = new JTextFieldHint();
 		userField.setHint(str);
 		userField.addActionListener(loginActionListener());
@@ -447,8 +479,10 @@ public class LoginDialog extends JDialog{
 	 */
 	private void setPassField(String str){
 		passLab = new JLabel(str);
+		passLab.setFont(JTextFieldHint.FONT_GAINED_DEFAULT);
 		passLab.setBorder(new EmptyBorder(0, 10, 0, 1));
 		passField = new JPasswordField();
+		passField.setFont(JTextFieldHint.FONT_GAINED_DEFAULT);
 		passField.addActionListener(loginActionListener());
 	}
 
@@ -483,7 +517,6 @@ public class LoginDialog extends JDialog{
 	 * @param listener listener a agregar
 	 */
 	public void addLoginListener(LoginListener listener){
-		System.out.println("agrega");
 		listListener.add(listener);
 	}
 
@@ -523,7 +556,6 @@ public class LoginDialog extends JDialog{
 	 * llama al metodo registerEvent del LoginListener
 	 */
 	private void runRegisterEvent(){
-		System.out.println("asado" + listListener);
 		LoginEvent e = new LoginEvent(this , userField.getContent() , passField.getPassword());
 		Iterator<LoginListener> it = listListener.iterator();
 		while(it.hasNext()){
@@ -531,6 +563,112 @@ public class LoginDialog extends JDialog{
 			lst.registerEvent(e);
 		}
 	}
+	
+	/**
+	 * ---- EXTERNAL INTERACTION
+	 */
+	
+	/**
+	 * obtiene el foco del campo de usuario 
+	 */
+	public void userRequestFocus(){
+		userField.requestFocus();
+	}
+	
+	/**
+	 * obtiene el foco del campo de contraseña 
+	 */
+	public void passRequestFocus(){
+		passField.requestFocus();
+	}
+	
+	/**
+	 * obtiene el foco del boton cancelar
+	 */
+	public void cancelRequestFocus(){
+		if(cancel != null){
+			cancel.requestFocus();
+		}
+	}
+	
+	/**
+	 * obtiene el foco del boton registrar
+	 */
+	public void registerRequestFocus(){
+		if(register != null){
+			register.requestFocus();
+		}
+	}
+	
+	/**
+	 * obtiene el foco del boton iniciar sesion
+	 */
+	public void loginRequestFocus(){
+		login.requestFocus();
+	}
+	
+	/**
+	 * setea el contenido del campo de usuario
+	 * @param str texto a setear en el campo
+	 */
+	public void setUser(String str){
+		userField.setText(str);
+	}
+	
+	/**
+	 * setea el contenido del campo de contraseña
+	 * @param str texto a setear en el campo
+	 */
+	public void setPassword(String str){
+		passField.setText(str);
+	}
 
-
+	/**
+	 * setea el color del campo de usuario
+	 * @param b true si es correcto, false si es erroneo
+	 */
+	public void setUserOkColor(boolean b){
+		if(b){
+			userField.setOkColor();
+		}
+		else{
+			userField.setErrorColor();
+		}
+	}
+	
+	/**
+	 * setea el color del campo de contraseña
+	 * @param b true si es correcto, false si es erroneo
+	 */
+	public void setPassOkColor(boolean b){
+		if(b){
+			passField.setBackground(JTextFieldHint.OK_COLOR);
+		}
+		else{
+			passField.setBackground(JTextFieldHint.ERROR_COLOR);
+		}
+	}
+	
+	/**
+	 * limpia el color del campo de usuario
+	 */
+	public void clearUserColor(){
+		userField.setBackground(null);
+	}
+	
+	/**
+	 * limpia el color del campo de contraseña
+	 */
+	public void clearPassColor(){
+		passField.setBackground(null);
+	}
+	
+	/**
+	 * limpia el contenido de los campos de entrada
+	 */
+	public void clearFields(){
+		userField.clearField();
+		passField.setText("");
+	}
+		
 }
