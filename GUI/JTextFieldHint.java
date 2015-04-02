@@ -31,6 +31,10 @@ public class JTextFieldHint extends JTextField implements FocusListener {
 	private static final long serialVersionUID = 1L;
 
 	/**
+	 * ---- CONSTANTS
+	 */
+	
+	/**
 	 * fuente para foco perdido predefinido
 	 */
 	public static final Font FONT_LOST_DEFAULT = new Font("Monaco", Font.ITALIC, 14);
@@ -49,7 +53,21 @@ public class JTextFieldHint extends JTextField implements FocusListener {
 	 * color para foco ganado predefinido
 	 */
 	public static final Color COLOR_GAINED_DEFAULT = Color.BLACK;
+	
+	/**
+	 * color de estado error
+	 */
+	public static final Color ERROR_COLOR = new Color (255,204,204);
 
+	/**
+	 * color de estado correcto
+	 */
+	public static final Color OK_COLOR = new Color (204,255,204);
+
+	/**
+	 * ---- INFO COMPONENTS
+	 */
+	
 	/**
 	 * informacion para indicacion
 	 */
@@ -76,6 +94,10 @@ public class JTextFieldHint extends JTextField implements FocusListener {
 	private Color Color_Gained;
 
 	/**
+	 * ---- CONSTRUCTORS
+	 */
+	
+	/**
 	 * Constructor de la clase
 	 * @param Font_Lost	fuente de foco perdido
 	 * @param Font_Gained fuente de foco ganado
@@ -98,6 +120,10 @@ public class JTextFieldHint extends JTextField implements FocusListener {
 		this(FONT_LOST_DEFAULT , FONT_GAINED_DEFAULT , COLOR_LOST_DEFAULT , COLOR_GAINED_DEFAULT);
 	}
 
+	/**
+	 * ---- METHODS
+	 */
+	
 	/**
 	 * setea el indicador a mostrar
 	 * @param hint texto del indicador
@@ -180,7 +206,25 @@ public class JTextFieldHint extends JTextField implements FocusListener {
 			return "";
 		return get;
 	}
+	
+	/**
+	 * setea el campo con el color OK
+	 */
+	public void setOkColor(){
+		this.setBackground(OK_COLOR);
+	}
+	
+	/**
+	 * setea el campo con el color de ERROR
+	 */
+	public void setErrorColor(){
+		this.setBackground(ERROR_COLOR);
+	}
 
+	/**
+	 * --- LISTENERS FOR INTERNAL WORK
+	 */
+	
 	@Override
 	public void focusGained(FocusEvent e) {
 		//si el contenido del field es el indicador
