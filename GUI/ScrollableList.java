@@ -1,17 +1,22 @@
 package ExtraClass.GUI;
 
 
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.Collections;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionListener;
 
 
-public class ScrollableList extends JScrollPane{
+public class ScrollableList extends JPanel{
 
 	/**
 	 * Lista de Strings con barra de desplazamiento
@@ -21,27 +26,66 @@ public class ScrollableList extends JScrollPane{
 
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * lista de strings
-	 */
+	//etiqueta de la lista
+	private JLabel label;
+
+	// lista de strings
 	private JList<String> list;
 
-	/**
-	 * modelo de la lista
-	 */
+	// modelo de la lista
 	private DefaultListModel<String> model;
+	
+	//scroll para lista
+	private JScrollPane scroll;
 
+	/**
+	 * ---- CONSTRUCTORS
+	 */
+	
 	/**
 	 * Contructor de la clase
+	 * @param label etiqueta de la lista
 	 */
-	public ScrollableList(){
+	public ScrollableList(String label){
+		this.label = new JLabel(label);
 		this.model = new DefaultListModel<String>();
 		this.list = new JList<String>(model);
-		this.setViewportView(list);
+		this.scroll = new JScrollPane(list);
 		//setea valores predeterminados de la clase
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		this.label.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		this.setLayout(new GridBagLayout());
+		//agrega los componentes al panel
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		gbc.gridwidth = 1;
+		gbc.gridheight = 1;
+		gbc.weightx = 1.0;
+		gbc.weighty = 0.0;
+		gbc.fill= GridBagConstraints.CENTER;
+		this.add(this.label , gbc);
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		gbc.gridwidth = 1;
+		gbc.gridheight = 1;
+		gbc.weightx = 1.0;
+		gbc.weighty = 1.0;
+		gbc.fill= GridBagConstraints.BOTH;
+		this.add(scroll , gbc);
+	}
+	
+	/**
+	 * Constructor de la clase
+	 */
+	public ScrollableList(){
+		this("");
 	}
 
+	/**
+	 * ---- METHODS
+	 */
+	
 	/**
 	 * agrega un elemento a la lista
 	 * @param element elemento a agregar
@@ -73,7 +117,7 @@ public class ScrollableList extends JScrollPane{
 	public void addAt(String element , int index){
 		model.insertElementAt(element, index);
 	}
-	
+
 	/**
 	 * modifica un item de la lista
 	 * @param newElement nuevo valor del item de la lista
@@ -108,7 +152,7 @@ public class ScrollableList extends JScrollPane{
 	public ArrayList<String> getAll(){
 		return Collections.list(model.elements());
 	}
-	
+
 	/**
 	 * remueve un elemento de la lista
 	 * @param element elemento a eliminar
@@ -116,7 +160,7 @@ public class ScrollableList extends JScrollPane{
 	public void removeElement(String element){
 		model.removeElement(element);
 	}
-	
+
 	/**
 	 * elimina un elemento de la lista segun su indice
 	 * @param index indice del elemento a eliminar
@@ -125,7 +169,7 @@ public class ScrollableList extends JScrollPane{
 	public String removeIndex(int index){
 		return model.remove(index);
 	}
-	
+
 	/**
 	 * obitiene el elemento seleccionado en la lista
 	 * @return elemento seleccionado en la lista
@@ -133,7 +177,7 @@ public class ScrollableList extends JScrollPane{
 	public String getSelectedValue(){
 		return list.getSelectedValue();
 	}
-	
+
 	/**
 	 * obtiene el indice del elemento seleccionado en la lista
 	 * @return indice del elemento seleccionado, retorna -1 en 
@@ -142,7 +186,7 @@ public class ScrollableList extends JScrollPane{
 	public int getSelectedIndex(){
 		return list.getSelectedIndex();
 	}
-	
+
 	/**
 	 * añade un listener de seleccion a la lista
 	 * @param listener listener de seleccion para lista
@@ -150,7 +194,7 @@ public class ScrollableList extends JScrollPane{
 	public void addSelectionListener(ListSelectionListener listener){
 		list.addListSelectionListener(listener);
 	}
-	
+
 	/**
 	 * setea la cantidad de filas visibles
 	 * @param cant cantidad de filas visibles
@@ -159,4 +203,20 @@ public class ScrollableList extends JScrollPane{
 		list.setVisibleRowCount(cant);
 	}
 	
+	/**
+	 * setea la etiqueta de la lista
+	 * @param label etiqueta de la lista
+	 */
+	public void setLabel(String label){
+		this.label.setText(label);
+	}
+	
+	/**
+	 * retorna la etiqueta de la lista
+	 * @return etiqueta de la lista
+	 */
+	public String getLabel(){
+		return this.label.getText();
+	}
+
 }
