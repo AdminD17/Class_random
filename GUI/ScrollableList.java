@@ -219,4 +219,20 @@ public class ScrollableList extends JPanel{
 		return this.label.getText();
 	}
 
+	/**
+	 * Retorna el objeto JList del panel
+	 * @return objeto JList
+	 */
+	public JList<String> getList(){
+		return list;
+	}
+	
+	/**
+	 * Retorna el modelo de la lista
+	 * @return modelo de lista
+	 */
+	public DefaultListModel<String> getModel(){
+		return model;
+	}
+	
 }
