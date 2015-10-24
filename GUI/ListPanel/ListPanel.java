@@ -239,7 +239,7 @@ public class ListPanel extends JPanel {
 		ActionListener l = new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int index = list.getSelectedIndex();
+				int index = list.getList().getSelectedIndex();
 				String str = textField.getContent();
 				ListPanelEvent event = new ListPanelEvent(
 						this ,
@@ -247,7 +247,7 @@ public class ListPanel extends JPanel {
 						str);
 				//si se esta creando un item
 				if(isCreating){
-					list.add(str);
+					list.getModel().addElement(str);
 					isCreating = false;
 					//activa el listener
 					listener.addItemEvent(event);
@@ -256,7 +256,7 @@ public class ListPanel extends JPanel {
 				}
 				//si se esta editando un item
 				else if(isEditing && index >= 0){
-					list.setElementAt(str, index);
+					list.getModel().setElementAt(str, index);
 					isEditing = false;
 					//activa el listener
 					listener.editItemEvent(event);
@@ -274,14 +274,14 @@ public class ListPanel extends JPanel {
 	 */
 	private void setScrollableList(){
 		list = new ScrollableList();
-		list.addSelectionListener(new ListSelectionListener(){
+		list.getList().addListSelectionListener(new ListSelectionListener(){
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				if(!isCreating && !isEditing){
 					ListPanelEvent event = new ListPanelEvent(
 							this ,
-							list.getSelectedIndex() ,
-							list.getSelectedValue());
+							list.getList().getSelectedIndex() ,
+							list.getList().getSelectedValue());
 					listener.selectElementEvent(event);
 				}
 			}
@@ -312,13 +312,13 @@ public class ListPanel extends JPanel {
 		removeItem.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int index = list.getSelectedIndex();
+				int index = list.getList().getSelectedIndex();
 				if(index >= 0){
 					ListPanelEvent event = new ListPanelEvent(
 							this ,
 							index ,
-							list.getSelectedValue());
-					list.removeIndex(index);
+							list.getList().getSelectedValue());
+					list.getModel().remove(index);
 					listener.removeItemEvent(event);
 				}
 
@@ -335,8 +335,8 @@ public class ListPanel extends JPanel {
 		editItem.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(list.getSelectedIndex() >= 0){
-					textField.setContent(list.getSelectedValue());
+				if(list.getList().getSelectedIndex() >= 0){
+					textField.setContent(list.getList().getSelectedValue());
 					isEditing = true;
 					setInEnabled(true);
 				}
@@ -387,6 +387,5 @@ public class ListPanel extends JPanel {
 			textField.setContent(str);
 		}
 	}
-
 
 }
