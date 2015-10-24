@@ -12,11 +12,11 @@ import java.io.Serializable;
  * Layout que permite mostrar el contenido de un contenedor en forma de lista.
  * Esta permite mostrarla en orden ascendente y descendemte, ademas de soportar visualizacion
  * optima (no calcula los objetos no visibles)
- * 
+ *
  * @author David Giordana
  *
  */
-public class ListLayout2 implements LayoutManager2, Serializable {
+public class ListLayout implements LayoutManager2, Serializable {
 
 	private static final long serialVersionUID = -3347619822413708016L;
 
@@ -32,36 +32,22 @@ public class ListLayout2 implements LayoutManager2, Serializable {
 
 	//Orientacion de los elementos
 	private int orientation;
-	
-	//Indica si se utiliza el modo optimo
-	private boolean optim;
 
-	
 	/**
 	 * Constructor de la clase
 	 * @param orientation Indice de la orientacion
-	 * @param optim Indica si se utiliza el modo optimo
 	 */
-	public ListLayout2(int orientation , boolean optim) {
+	public ListLayout(int orientation) {
 		setOrientation(orientation);
-		setOptim(optim);
-	}
-	
-	/**
-	 * Constructor de la clase
-	 * @param orientation Indice de la orientacion
-	 */
-	public ListLayout2(int orientation) {
-		this(orientation , true);
 	}
 
 	/**
 	 * Constructor de la clase
 	 */
-	public ListLayout2(){
+	public ListLayout(){
 		this(TOP_BOTTOM);
 	}
-	
+
 	/**
 	 * Setea la orientacion del layout
 	 * @param orientation Orientacion deseada
@@ -76,22 +62,6 @@ public class ListLayout2 implements LayoutManager2, Serializable {
 	 */
 	public int getOrientation() {
 		return this.orientation;
-	}
-	
-	/**
-	 * Setea el modo optimo
-	 * @param b valor a setear
-	 */
-	public void setOptim(boolean b){
-		this.optim = b;
-	}
-	
-	/**
-	 * Retorna true si está en modo optimo
-	 * @return true si está en modo óptimo
-	 */
-	public boolean isOptim(){
-		return optim;
 	}
 
 	/**
@@ -108,7 +78,7 @@ public class ListLayout2 implements LayoutManager2, Serializable {
 
 	/**
 	 * No usado por la clase
-	 */	
+	 */
 	@Override
 	public void addLayoutComponent(Component comp, Object constraints) {}
 
@@ -118,13 +88,13 @@ public class ListLayout2 implements LayoutManager2, Serializable {
 	 * @return Dimesnion preferida
 	 */
 	@Override
-	public Dimension preferredLayoutSize(Container target) {		
+	public Dimension preferredLayoutSize(Container target) {
 		int x = 0;
 		int y = 0;
 		synchronized (target.getTreeLock()) {
 			Insets insets = target.getInsets();
 			for(Component c : target.getComponents()){
-				if(isOptim() && !c.isVisible()){
+				if(!c.isVisible()){
 					continue;
 				}
 				x = Math.max(x, c.getPreferredSize().width);
@@ -148,7 +118,7 @@ public class ListLayout2 implements LayoutManager2, Serializable {
 		synchronized (target.getTreeLock()) {
 			Insets insets = target.getInsets();
 			for(Component c : target.getComponents()){
-				if(isOptim() && !c.isVisible()){
+				if(!c.isVisible()){
 					continue;
 				}
 				x = Math.max(x, c.getMinimumSize().width);
@@ -172,7 +142,7 @@ public class ListLayout2 implements LayoutManager2, Serializable {
 		synchronized (target.getTreeLock()) {
 			Insets insets = target.getInsets();
 			for(Component c : target.getComponents()){
-				if(isOptim() && !c.isVisible()){
+				if(!c.isVisible()){
 					continue;
 				}
 				x = Math.max(x, c.getMaximumSize().width);
@@ -219,7 +189,7 @@ public class ListLayout2 implements LayoutManager2, Serializable {
 			if(orientation == TOP_BOTTOM){
 				for(int i = 0 ; i < n ; i++){
 					Component comp = target.getComponent(i);
-					if(isOptim() && !comp.isVisible()){
+					if(!comp.isVisible()){
 						continue;
 					}
 					Dimension d = comp.getPreferredSize();
@@ -230,7 +200,7 @@ public class ListLayout2 implements LayoutManager2, Serializable {
 			else{
 				for(int i = n -1 ; i >= 0 ; i--){
 					Component comp = target.getComponent(i);
-					if(isOptim() && !comp.isVisible()){
+					if(!comp.isVisible()){
 						continue;
 					}
 					Dimension d = comp.getPreferredSize();
@@ -243,7 +213,7 @@ public class ListLayout2 implements LayoutManager2, Serializable {
 
 	/**
 	 * No usado por la clase
-	 */	
+	 */
 	@Override
 	public void invalidateLayout(Container target) {}
 

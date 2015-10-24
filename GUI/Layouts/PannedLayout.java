@@ -17,7 +17,7 @@ import java.io.Serializable;
  * @author David Giordana
  *
  */
-public class PannedLayout1 implements LayoutManager2 , Serializable{
+public class PannedLayout implements LayoutManager2 , Serializable{
 
 	/**
 	 * ---- CONSTANTS
@@ -62,7 +62,7 @@ public class PannedLayout1 implements LayoutManager2 , Serializable{
 	/**
 	 * Constructor del layout
 	 */
-	public PannedLayout1(){
+	public PannedLayout(){
 		clearConstraints();
 	}
 
