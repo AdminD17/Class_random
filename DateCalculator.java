@@ -6,9 +6,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**
- * Clase con metodos y atributos para el calculo de fechas y cosas relacionadas
- * 
- * 
+ * Clase con metodos y atributos para el calculo y muestra de fechas
+ *
  * @author David Giordana
  *
  */
@@ -44,7 +43,7 @@ public class DateCalculator {
 		"Viernes" ,
 		"Sabado"
 	};
-	
+
 	//patron de fecha 1
 	public static final String DATE_FORMAT_1 = "yyyy-MM-dd-HH-mm-ss";
 
@@ -103,8 +102,8 @@ public class DateCalculator {
 	}
 
 	/**
-	 * convierte un indice en el nomvre de un dia de la semana en orden 
-	 * definido por la clase @see Calendar 
+	 * convierte un indice en el nomvre de un dia de la semana en orden
+	 * definido por la clase @see Calendar
 	 * @param day - indice del dia solicitado
 	 * @return nombre del dia solicitado
 	 */
@@ -127,7 +126,7 @@ public class DateCalculator {
 		} catch (ParseException e) {}
 		return cal;
 	}
-	
+
 	/**
 	 * convierte un objeto calendario a una cadena de texto
 	 * @param cal objeto calendario
@@ -138,7 +137,7 @@ public class DateCalculator {
 		SimpleDateFormat format = new SimpleDateFormat(pattern);
 		return format.format(cal.getTime());
 	}
-	
+
 	/**
 	 * convierte una cadena de texto a una fecha
 	 * @param str cadena a analizar
@@ -153,7 +152,7 @@ public class DateCalculator {
 			throw new IllegalArgumentException("Patrón \"" + pattern + "\" inváido");
 		}
 	}
-	
+
 	/**
 	 * convierte un objeto calendario a una cadena de texto
 	 * @param cal objeto calendario
@@ -168,7 +167,5 @@ public class DateCalculator {
 			throw new IllegalArgumentException("Patrón \"" + pattern + "\" inváido");
 		}
 	}
-
-
 
 }
