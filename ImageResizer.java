@@ -8,21 +8,11 @@ import javax.swing.ImageIcon;
 /**
  * Clase encargada de abrir imagenes y permite redimensionarlas para
  * uso del programa (redimension volatil)
- * 
+ *
  * @author David Giordana
  *
  */
 public class ImageResizer {
-
-	//Dimension del limitador
-	private Dimension dim;
-	
-	/**
-	 * Constructor de la clase
-	 */
-	public ImageResizer(){
-		dim = new Dimension();
-	}
 	
 	/**
 	 * Carga imagen segun la ruta del archivo
@@ -30,7 +20,7 @@ public class ImageResizer {
 	 * @return Objeto ImageIcon extraida del archivo, null en caso de ocurrir
 	 * algun error
 	 */
-	public ImageIcon loadImageIcon(String path){
+	public static ImageIcon loadImageIcon(String path){
 		try{
 			return new ImageIcon(path);
 		}catch(Exception e){
@@ -38,36 +28,36 @@ public class ImageResizer {
 			return null;
 		}
 	}
-	
+
 	/**
 	 * Carga imagen segun la ruta del archivo
 	 * @param path ruta de la imagen
 	 * @return Objeto Image extraida del archivo, null en caso de ocurrir
 	 * algun error
 	 */
-	public Image LoadImage(String path){
+	public static Image LoadImage(String path){
 		ImageIcon image = loadImageIcon(path);
 		return toImage(image);
 	}
-	
+
 	/**
 	 * Convierte un objeto ImageIcon en Image
 	 * @param image objeto ImageIcon
 	 * @return objeto Image
 	 */
-	public Image toImage(ImageIcon image){
+	public static Image toImage(ImageIcon image){
 		return image == null ? null : image.getImage();
 	}
-	
+
 	/**
 	 * Convierte un objeto Image en ImageIcon
 	 * @param image objeto Image
 	 * @return objeto ImageIcon
 	 */
-	public ImageIcon toImageIcon(Image image){
+	public static ImageIcon toImageIcon(Image image){
 		return image == null ? null : new ImageIcon(image);
 	}
-	
+
 	/**
 	 * Redimensiona una imagen
 	 * @param image imagen a redimensionar
@@ -75,7 +65,7 @@ public class ImageResizer {
 	 * @param h altura deseada
 	 * @return imagen redimensionada
 	 */
-	public ImageIcon resize(ImageIcon image, int w , int h){
+	public static ImageIcon resize(ImageIcon image, int w , int h){
 		if(image == null){
 			return image;
 		}
@@ -83,7 +73,7 @@ public class ImageResizer {
 		w = w < 0 ? 0 : w;
 		return new ImageIcon(image.getImage().getScaledInstance(w, h, Image.SCALE_SMOOTH));
 	}
-	
+
 	/**
 	 * Redimensiona una imagen
 	 * @param image imagen a redimensionar
@@ -91,7 +81,7 @@ public class ImageResizer {
 	 * @param h alto deseado
 	 * @return imagen redimensionada
 	 */
-	public Image resize(Image image, int w , int h){
+	public static Image resize(Image image, int w , int h){
 		if(image == null){
 			return image;
 		}
@@ -99,38 +89,40 @@ public class ImageResizer {
 		w = w < 0 ? 0 : w;
 		return toImage(new ImageIcon(image.getScaledInstance(w, h, Image.SCALE_SMOOTH)));
 	}
-	
+
 	/**
 	 * Setea la dimension del limitador
 	 * @param d dimension del limitador
-	 */
+	 *
 	public void setDimension(Dimension d){
 		dim = d;
-	}
-	
+	}*/
+
 	/**
 	 * Obtiene la dimension del limitador
 	 * @return dimension del limitador
-	 */
+	 *
 	public Dimension getDimension(){
 		return dim;
-	}
-	
+	}*/
+
 	/**
 	 * Redimensiona una imagen con el limitador seteado
 	 * @param image imagen a redimensionar
+	 * @param dim tamaño deseado para la redimension
 	 * @return imagen redimensionada
 	 */
-	public Image resizeLimited(Image image){
-		return toImage(resizeLimited(toImageIcon(image)));
+	public static Image resizeLimited(Image image , Dimension dim){
+		return toImage(resizeLimited(toImageIcon(image) , dim));
 	}
-	
+
 	/**
 	 * Redimensiona una imagen con el limitador seteado
 	 * @param image imagen a redimensionar
+     * @param dim tamaño deseado para la redimension
 	 * @return imagen redimensionada
 	 */
-	public ImageIcon resizeLimited(ImageIcon image){
+	public static ImageIcon resizeLimited(ImageIcon image , Dimension dim){
 		int wt = (int) Math.abs(image.getIconWidth() - dim.getWidth());
 		int ht = (int) Math.abs(image.getIconHeight() - dim.getHeight());
 		if(ht == 0 || wt == 0){
@@ -149,5 +141,5 @@ public class ImageResizer {
 			return resize(image , w , h);
 		}
 	}
-	
+
 }
