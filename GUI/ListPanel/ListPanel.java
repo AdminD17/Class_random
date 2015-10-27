@@ -10,8 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import ExtraClass.GUI.JTextFieldHint;
 import ExtraClass.GUI.ScrollableList;
+import ExtraClass.GUI.InputFirlds.JTextFieldHint;
 
 
 public class ListPanel extends JPanel {

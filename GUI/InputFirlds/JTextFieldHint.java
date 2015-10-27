@@ -1,4 +1,4 @@
-package ExtraClass.GUI;
+package ExtraClass.GUI.InputFirlds;
 
 
 import java.awt.Color;
